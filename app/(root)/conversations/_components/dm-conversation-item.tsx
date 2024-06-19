@@ -9,9 +9,17 @@ type Props = {
   id: Id<"conversations">;
   imageUrl: string;
   username: string;
+  lastMessageSender?: string;
+  lastMessageContent?: string;
 };
 
-const DmConversationItem = ({ id, imageUrl, username }: Props) => {
+const DmConversationItem = ({
+  id,
+  imageUrl,
+  username,
+  lastMessageSender,
+  lastMessageContent,
+}: Props) => {
   return (
     <Link className="w-full" href={`/conversations/${id}`}>
       <Card className="p-2 flex flex-row items-center gap-4 truncate">
@@ -25,9 +33,21 @@ const DmConversationItem = ({ id, imageUrl, username }: Props) => {
 
           <div className="flex flex-col truncate">
             <h4 className="truncate">{username}</h4>
-            <p className="text-sm text-muted-foreground truncate">
-              Click here to start a conversation with {username}!
-            </p>
+            {lastMessageSender && lastMessageContent ? (
+              <span className="text-sm text-muted-foreground flex truncate overflow-ellipsis ">
+                <p className="font-semibold">
+                  {lastMessageSender}
+                  {":"}&nbsp;
+                </p>
+                <p className="truncate overflow-ellipsis">
+                  {lastMessageContent}
+                </p>
+              </span>
+            ) : (
+              <p className="text-sm text-muted-foreground truncate">
+                Click here to start a conversation with {username}!
+              </p>
+            )}
           </div>
         </div>
       </Card>
