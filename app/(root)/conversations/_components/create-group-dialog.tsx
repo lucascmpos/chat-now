@@ -46,11 +46,11 @@ import { z } from "zod";
 type Props = {};
 
 const CreateGroupFormSchema = z.object({
-  name: z.string().min(1, { message: "Name is required" }),
+  name: z.string().min(1, { message: "É preciso um nome" }),
   members: z
     .string()
     .array()
-    .min(1, { message: "At least 1 member is required" }),
+    .min(1, { message: "Adicione pelo menos um membro" }),
 });
 
 const CreateGroupDialog = (props: Props) => {
@@ -83,11 +83,11 @@ const CreateGroupDialog = (props: Props) => {
     await createGroup({ name: values.name, members: values.members })
       .then(() => {
         form.reset();
-        toast.success("Group created successfully");
+        toast.success("Grupo criado com sucesso");
       })
       .catch((error) => {
         toast.error(
-          error instanceof ConvexError ? error.data : "Unknown error"
+          error instanceof ConvexError ? error.data : "Erro inesperado"
         );
       });
   };
@@ -103,26 +103,31 @@ const CreateGroupDialog = (props: Props) => {
           </Button>
         </TooltipTrigger>
         <TooltipContent>
-          <p>Create Group</p>
+          <p>Criar grupo</p>
         </TooltipContent>
       </Tooltip>
 
       <DialogContent className="block">
         <DialogHeader>
-          <DialogTitle>Create a group</DialogTitle>
-          <DialogDescription>Add your friends to a group!</DialogDescription>
+          <DialogTitle>Crie um grupo</DialogTitle>
+          <DialogDescription>
+            Adicione seus amigos para um grupo!
+          </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)}>
+          <form
+            className="space-y-4"
+            onSubmit={form.handleSubmit(handleSubmit)}
+          >
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => {
                 return (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Nome do grupo</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Group name..." />
+                      <Input {...field} placeholder="Nome do grupo aqui..." />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -135,7 +140,7 @@ const CreateGroupDialog = (props: Props) => {
               render={() => {
                 return (
                   <FormItem>
-                    <FormLabel>Friends</FormLabel>
+                    <FormLabel>Amigos</FormLabel>
                     <FormControl>
                       <DropdownMenu>
                         <DropdownMenuTrigger
@@ -143,7 +148,7 @@ const CreateGroupDialog = (props: Props) => {
                           disabled={unselectedFriends.length === 0}
                         >
                           <Button className="w-full" variant="outline">
-                            Select
+                            Selecionar amigos
                           </Button>
                         </DropdownMenuTrigger>
 
@@ -217,7 +222,7 @@ const CreateGroupDialog = (props: Props) => {
             ) : null}
             <DialogFooter>
               <Button disabled={pending} type="submit">
-                Create
+                Criar
               </Button>
             </DialogFooter>
           </form>

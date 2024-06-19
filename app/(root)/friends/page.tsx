@@ -14,11 +14,11 @@ const FriendsPage = (props: Props) => {
   const requests = useQuery(api.requests.get);
   return (
     <>
-      <ItemList title="Friends" action={<AddFriendDialog />}>
+      <ItemList title="Amigos" action={<AddFriendDialog />}>
         {requests ? (
           requests.length === 0 ? (
             <p className="w-full h-full flex items-center justify-center">
-              No friend requests
+              Sem novos convites de amizade
             </p>
           ) : (
             requests.map((request) => {

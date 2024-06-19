@@ -17,11 +17,11 @@ const Layout = ({ children }: Props) => {
 
   return (
     <>
-      <ItemList title="Conversations" action={<CreateGroupDialog />}>
+      <ItemList title="Conversas" action={<CreateGroupDialog />}>
         {conversations ? (
           conversations.length === 0 ? (
             <p className="w-full h-full flex items-center justify-center">
-              No conversations. Add a friend to start a conversation!
+              Adicione um amigo para começar a conversar!
             </p>
           ) : (
             conversations.map((conversation) => {
@@ -32,7 +32,7 @@ const Layout = ({ children }: Props) => {
                     <React.Fragment key={conversation.conversation._id}>
                       <div className="flex flex-col items-start w-full">
                         <h1 className="text-2xl font-semibold tracking-tight">
-                          Groups
+                          Grupos
                         </h1>
                       </div>
                       <GroupConversationItem

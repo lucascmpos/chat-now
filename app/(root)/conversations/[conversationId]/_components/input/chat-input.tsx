@@ -22,7 +22,7 @@ import { SendHorizonal } from "lucide-react";
 
 const chatMessageSchema = z.object({
   content: z.string().min(1, {
-    message: "Message cannot be empty",
+    message: "A mensagem esta vazia",
   }),
 });
 
@@ -61,9 +61,7 @@ const ChatInput = () => {
       })
       .catch((error) => {
         toast.error(
-          error instanceof ConvexError
-            ? error.message
-            : "Unexpected error occurred"
+          error instanceof ConvexError ? error.message : "Erro inesperado"
         );
       });
   };
@@ -95,7 +93,7 @@ const ChatInput = () => {
                         {...field}
                         onChange={handleInputChange}
                         onClick={handleInputChange}
-                        placeholder="Type a message..."
+                        placeholder="Digite sua mensagem..."
                         className="min-h-full w-full resize-none border-0 outline-0 bg-card text-card-foreground placeholder:text-muted-foreground p-1.5"
                       />
                     </FormControl>

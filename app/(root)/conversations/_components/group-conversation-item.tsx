@@ -45,7 +45,7 @@ const GroupConversationItem = ({
               </span>
             ) : (
               <p className="text-sm text-muted-foreground truncate">
-                Click here to start a conversation with {name}!
+                Clique aqui ver o grupo {name}!
               </p>
             )}
           </div>

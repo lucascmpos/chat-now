@@ -20,14 +20,14 @@ export const useNavigation = () => {
   const paths = useMemo(
     () => [
       {
-        name: "Conversations",
+        name: "Conversas",
         href: "/conversations",
         icon: <MessageSquare />,
         active: pathname.startsWith("/conversations"),
         count: unseenMessagesCount,
       },
       {
-        name: "Friends",
+        name: "Amigos",
         href: "/friends",
         icon: <Users />,
         active: pathname.startsWith("/friends"),

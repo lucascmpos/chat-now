@@ -48,7 +48,7 @@ const DmConversationItem = ({
               </span>
             ) : (
               <p className="text-sm text-muted-foreground truncate">
-                Click here to start a conversation with {username}!
+                Clique aqui para conversar com {username}!
               </p>
             )}
           </div>

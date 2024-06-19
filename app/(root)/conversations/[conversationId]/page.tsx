@@ -32,7 +32,7 @@ const ConversationPage = ({ params: { conversationId } }: Props) => {
     </div>
   ) : conversation === null ? (
     <p className="w-full h-full flex items-center justify-center">
-      Conversation not found
+      Nenhuma conversa encontrada
     </p>
   ) : (
     <ConversationContainer>
@@ -64,19 +64,19 @@ const ConversationPage = ({ params: { conversationId } }: Props) => {
           conversation.isGroup
             ? [
                 {
-                  label: "Leave group",
+                  label: "Sair do grupo",
                   destructive: false,
                   onClick: () => setLeaveGroupDialogOpen(true),
                 },
                 {
-                  label: "Delete group",
+                  label: "Deletar grupo",
                   destructive: true,
                   onClick: () => setDeleteGroupDialogOpen(true),
                 },
               ]
             : [
                 {
-                  label: "Remove friend",
+                  label: "Remover amigo",
                   destructive: true,
                   onClick: () => setRemoveFriendDialogOpen(true),
                 },

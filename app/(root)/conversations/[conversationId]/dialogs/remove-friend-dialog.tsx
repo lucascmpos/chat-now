@@ -29,11 +29,11 @@ const RemoveFriendDialog = ({ conversationId, open, setOpen }: Props) => {
   const handleRemoveFriend = async () => {
     removeFriend({ conversationId })
       .then(() => {
-        toast.success("Removed friend");
+        toast.success("Amigo removido");
       })
       .catch((error) => {
         toast.error(
-          error instanceof ConvexError ? error.data : "Unknown error"
+          error instanceof ConvexError ? error.data : "Erro desconhecido"
         );
       });
   };
@@ -41,16 +41,16 @@ const RemoveFriendDialog = ({ conversationId, open, setOpen }: Props) => {
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogTitle>Tem certeza?</AlertDialogTitle>
           <AlertDialogDescription>
-            All messages will be deleted and you will not be able to message
-            this user unless you invite him again.
+            Todas as mensagens serão deletadas e você não poderá enviar
+            mensagens para este usuário a menos que o convide novamente.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={pending}>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={pending}>Cancelar</AlertDialogCancel>
           <AlertDialogAction onClick={handleRemoveFriend} disabled={pending}>
-            {pending ? "Removing..." : "Remove"}
+            {pending ? "Removendo..." : "Remover"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

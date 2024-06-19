@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/tooltip";
 import { useNavigation } from "@/hooks/use-navigation";
 import { UserButton } from "@clerk/clerk-react";
+import { Github } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -52,6 +53,20 @@ const DesktopNav = () => {
         </ul>
       </nav>
       <div className="flex flex-col gap-4 items-center">
+        <Tooltip>
+          <TooltipTrigger>
+            <a
+              href="https://github.com/lucascmpos/chat-now"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button size="icon" variant="outline">
+                <Github />
+              </Button>
+            </a>
+          </TooltipTrigger>
+          <TooltipContent>Repositório do Chat Now</TooltipContent>
+        </Tooltip>
         <ThemeToggle />
         <UserButton />
       </div>

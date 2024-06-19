@@ -43,16 +43,16 @@ const LeaveGroupDialog = ({ conversationId, open, setOpen }: Props) => {
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogTitle>Tem certeza?</AlertDialogTitle>
           <AlertDialogDescription>
-            You will not be able to send or see any previous messages in this
-            group again.
+            Você não poderá enviar ou ver mensagens anteriores neste grupo
+            novamente.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={pending}>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={pending}>Cancelar</AlertDialogCancel>
           <AlertDialogAction onClick={handleLeaveGroup} disabled={pending}>
-            {pending ? "Leaving" : "Leave"}
+            {pending ? "Saindo..." : "Sair"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

@@ -46,13 +46,11 @@ const Request = ({ id, imageUrl, username, email }: Props) => {
           onClick={() => {
             acceptRequest({ id })
               .then(() => {
-                toast.success("Friend request accepted");
+                toast.success("Convite aceito");
               })
               .catch((error) => {
                 toast.error(
-                  error instanceof ConvexError
-                    ? error.data
-                    : "Unexpected error occurred"
+                  error instanceof ConvexError ? error.data : "Erro inesperado"
                 );
               });
           }}
@@ -67,13 +65,11 @@ const Request = ({ id, imageUrl, username, email }: Props) => {
           onClick={() => {
             denyRequest({ id })
               .then(() => {
-                toast.success("Friend request denied");
+                toast.success("Convite recusado");
               })
               .catch((error) => {
                 toast.error(
-                  error instanceof ConvexError
-                    ? error.data
-                    : "Unexpected error occurred"
+                  error instanceof ConvexError ? error.data : "Erro inesperado"
                 );
               });
           }}

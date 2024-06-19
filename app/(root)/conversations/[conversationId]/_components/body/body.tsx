@@ -45,18 +45,18 @@ const Body = ({ members }: Props) => {
     switch (names.length) {
       case 1:
         return (
-          <p className="text-muted-foreground text-sm text-right">{`Seen by ${names[0]}`}</p>
+          <p className="text-muted-foreground text-sm text-right">{`Visto por ${names[0]}`}</p>
         );
       case 2:
         return (
-          <p className="text-muted-foreground text-sm text-right">{`Seen by ${names[0]} and ${names[1]} `}</p>
+          <p className="text-muted-foreground text-sm text-right">{`Visto por ${names[0]} e ${names[1]} `}</p>
         );
       default:
         return (
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
-                <p className="text-muted-foreground text-sm text-right">{`Seen by ${names[0]} and ${names[1]} and ${names.length - 2} more `}</p>
+                <p className="text-muted-foreground text-sm text-right">{`Visto por ${names[0]} e ${names[1]} e ${names.length - 2} `}</p>
               </TooltipTrigger>
 
               <TooltipContent>

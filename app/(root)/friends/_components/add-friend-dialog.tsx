@@ -38,8 +38,8 @@ import { toast } from "sonner";
 const addFriendFormSchema = z.object({
   email: z
     .string()
-    .min(1, { message: "This field can't be empty" })
-    .email("Please enter a valid email"),
+    .min(1, { message: "Não pode ser vazio" })
+    .email("Digite um email valido"),
 });
 
 const AddFriendDialog = () => {
@@ -58,13 +58,11 @@ const AddFriendDialog = () => {
     await createRequest({ email: values.email })
       .then(() => {
         form.reset();
-        toast.success("Friend request sent");
+        toast.success("Convite enviado");
       })
       .catch((error) => {
         toast.error(
-          error instanceof ConvexError
-            ? error.data
-            : "Unexpected error occurred"
+          error instanceof ConvexError ? error.data : "Erro inesperado"
         );
         console.error(error);
       });
@@ -80,14 +78,14 @@ const AddFriendDialog = () => {
             </DialogTrigger>
           </Button>
         </TooltipTrigger>
-        <TooltipContent>Add new friend</TooltipContent>
+        <TooltipContent>Adicionar novo amigo</TooltipContent>
       </Tooltip>
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add new friend</DialogTitle>
+          <DialogTitle>Adicionar novo amigo</DialogTitle>
           <DialogDescription>
-            Send a request to connect with your friends!
+            Envie um pedido para se conectar com seus amigos!
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -110,7 +108,7 @@ const AddFriendDialog = () => {
             />
             <DialogFooter>
               <Button type="submit" disabled={pending}>
-                Send
+                Enviar
               </Button>
             </DialogFooter>
           </form>

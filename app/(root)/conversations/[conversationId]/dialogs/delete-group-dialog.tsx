@@ -43,16 +43,16 @@ const DeleteGroupDialog = ({ conversationId, open, setOpen }: Props) => {
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogTitle>Tem certeza?</AlertDialogTitle>
           <AlertDialogDescription>
-            All messages will be deleted and you will not be able to send
-            messages in this group again.
+            Todas as mensagens serão deletadas e você não poderá enviar
+            mensagens neste grupo novamente.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={pending}>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={pending}>Cancelar</AlertDialogCancel>
           <AlertDialogAction onClick={handleDeleteGroup} disabled={pending}>
-            {pending ? "Deleting..." : "Delete"}
+            {pending ? "Deletando..." : "Deletar"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
