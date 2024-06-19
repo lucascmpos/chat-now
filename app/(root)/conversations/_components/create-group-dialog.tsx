@@ -74,6 +74,7 @@ const CreateGroupDialog = (props: Props) => {
     return friends
       ? friends.filter((friend) => !members.includes(friend._id))
       : [];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [members.length, friends?.length]);
 
   const handleSubmit = async (
