@@ -6,6 +6,7 @@ import { useQuery } from "convex/react";
 import { Loader2 } from "lucide-react";
 import React from "react";
 import DmConversationItem from "./_components/dm-conversation-item";
+import CreateGroupDialog from "./_components/create-group-dialog";
 
 type Props = React.PropsWithChildren<{}>;
 
@@ -13,7 +14,7 @@ const Layout = ({ children }: Props) => {
   const conversations = useQuery(api.conversations.get);
   return (
     <>
-      <ItemList title="Conversations">
+      <ItemList title="Conversations" action={<CreateGroupDialog />}>
         {conversations ? (
           conversations.length === 0 ? (
             <p className="w-full h-full flex items-center justify-center">
