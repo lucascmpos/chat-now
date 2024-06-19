@@ -24,8 +24,8 @@ const DmConversationItem = ({
   unseenCount,
 }: Props) => {
   return (
-    <Link className="w-full" href={`/conversations/${id}`}>
-      <Card className="p-2 flex flex-row items-center justify-between">
+    <Link className="w-full " href={`/conversations/${id}`}>
+      <Card className="p-2 hover:bg-secondary flex flex-row items-center justify-between">
         <div className="flex items-center gap-4 truncate">
           <Avatar>
             <AvatarImage src={imageUrl} />

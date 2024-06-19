@@ -37,7 +37,7 @@ import { useMutationState } from "@/hooks/use-mutation-state";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "convex/react";
 import { ConvexError } from "convex/values";
-import { CirclePlusIcon, X } from "lucide-react";
+import { PlusIcon, X } from "lucide-react";
 import React, { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -98,7 +98,7 @@ const CreateGroupDialog = (props: Props) => {
         <TooltipTrigger>
           <Button size="icon" variant="outline">
             <DialogTrigger asChild>
-              <CirclePlusIcon />
+              <PlusIcon />
             </DialogTrigger>
           </Button>
         </TooltipTrigger>
