@@ -13,7 +13,7 @@ type Props = React.PropsWithChildren<{}>;
 
 const Layout = ({ children }: Props) => {
   const conversations = useQuery(api.conversations.get);
-  let firstGroupRendered = false;
+  let groupHeaderRendered = false;
 
   return (
     <>
@@ -24,52 +24,63 @@ const Layout = ({ children }: Props) => {
               Adicione um amigo para começar a conversar!
             </p>
           ) : (
-            conversations.map((conversation) => {
-              if (conversation.conversation.isGroup) {
-                if (!firstGroupRendered) {
-                  firstGroupRendered = true;
+            <>
+              {conversations.some(
+                (conversation) => !conversation.conversation.isGroup
+              ) && <div className="flex flex-col items-start w-full"></div>}
+              {conversations.map((conversation) => {
+                if (!conversation.conversation.isGroup) {
                   return (
-                    <React.Fragment key={conversation.conversation._id}>
-                      <div className="flex flex-col items-start w-full">
-                        <h1 className="text-2xl font-semibold tracking-tight">
-                          Grupos
-                        </h1>
-                      </div>
-                      <GroupConversationItem
-                        id={conversation.conversation._id}
-                        name={conversation.conversation.name || ""}
-                        lastMessageContent={conversation.lastMessage?.content}
-                        lastMessageSender={conversation.lastMessage?.sender}
-                        unseenCount={conversation.unseenCount}
-                      />
-                    </React.Fragment>
-                  );
-                } else {
-                  return (
-                    <GroupConversationItem
+                    <DmConversationItem
                       key={conversation.conversation._id}
                       id={conversation.conversation._id}
-                      name={conversation.conversation.name || ""}
+                      username={conversation.otherMember?.username || ""}
+                      imageUrl={conversation.otherMember?.imageUrl || ""}
                       lastMessageContent={conversation.lastMessage?.content}
                       lastMessageSender={conversation.lastMessage?.sender}
                       unseenCount={conversation.unseenCount}
                     />
                   );
                 }
-              } else {
-                return (
-                  <DmConversationItem
-                    key={conversation.conversation._id}
-                    id={conversation.conversation._id}
-                    username={conversation.otherMember?.username || ""}
-                    imageUrl={conversation.otherMember?.imageUrl || ""}
-                    lastMessageContent={conversation.lastMessage?.content}
-                    lastMessageSender={conversation.lastMessage?.sender}
-                    unseenCount={conversation.unseenCount}
-                  />
-                );
-              }
-            })
+              })}
+              {conversations.some(
+                (conversation) => conversation.conversation.isGroup
+              ) && (
+                <div className="flex flex-col items-start w-full">
+                  <h1 className="text-2xl font-semibold tracking-tight">
+                    Grupos
+                  </h1>
+                </div>
+              )}
+              {conversations.map((conversation) => {
+                if (conversation.conversation.isGroup) {
+                  if (!groupHeaderRendered) {
+                    groupHeaderRendered = true;
+                    return (
+                      <GroupConversationItem
+                        key={conversation.conversation._id}
+                        id={conversation.conversation._id}
+                        name={conversation.conversation.name || ""}
+                        lastMessageContent={conversation.lastMessage?.content}
+                        lastMessageSender={conversation.lastMessage?.sender}
+                        unseenCount={conversation.unseenCount}
+                      />
+                    );
+                  } else {
+                    return (
+                      <GroupConversationItem
+                        key={conversation.conversation._id}
+                        id={conversation.conversation._id}
+                        name={conversation.conversation.name || ""}
+                        lastMessageContent={conversation.lastMessage?.content}
+                        lastMessageSender={conversation.lastMessage?.sender}
+                        unseenCount={conversation.unseenCount}
+                      />
+                    );
+                  }
+                }
+              })}
+            </>
           )
         ) : (
           <Loader2 />
