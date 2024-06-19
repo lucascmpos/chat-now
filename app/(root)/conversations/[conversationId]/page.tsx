@@ -4,7 +4,7 @@ import ConversationContainer from "@/components/shared/conversation/conversation
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useQuery } from "convex/react";
-import { Loader2 } from "lucide-react";
+import { Loader2, LogOut, Trash2, UserX } from "lucide-react";
 import React, { useState } from "react";
 import Header from "./_components/header";
 import Body from "./_components/body/body";
@@ -65,11 +65,13 @@ const ConversationPage = ({ params: { conversationId } }: Props) => {
             ? [
                 {
                   label: "Sair do grupo",
+                  icon: <LogOut size={16} />,
                   destructive: false,
                   onClick: () => setLeaveGroupDialogOpen(true),
                 },
                 {
                   label: "Deletar grupo",
+                  icon: <Trash2 size={16} />,
                   destructive: true,
                   onClick: () => setDeleteGroupDialogOpen(true),
                 },
@@ -77,6 +79,7 @@ const ConversationPage = ({ params: { conversationId } }: Props) => {
             : [
                 {
                   label: "Remover amigo",
+                  icon: <UserX size={16} />,
                   destructive: true,
                   onClick: () => setRemoveFriendDialogOpen(true),
                 },

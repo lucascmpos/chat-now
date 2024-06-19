@@ -8,15 +8,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { CircleArrowLeft, Settings } from "lucide-react";
+import { CircleArrowLeft, Minus, Settings, Trash } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { ReactElement } from "react";
 
 type Props = {
   imageUrl?: string;
   name: string;
   options?: {
     label: string;
+    icon: ReactElement;
     destructive: boolean;
     onClick: () => void;
   }[];
@@ -49,10 +50,14 @@ const Header = ({ imageUrl, name, options }: Props) => {
                   <DropdownMenuItem
                     key={id}
                     onClick={option.onClick}
-                    className={cn("font-semibold", {
-                      "text-destructive": option.destructive,
-                    })}
+                    className={cn(
+                      "font-semibold items-center flex gap-2 cursor-pointer",
+                      {
+                        "text-destructive": option.destructive,
+                      }
+                    )}
                   >
+                    {option.icon}
                     {option.label}
                   </DropdownMenuItem>
                 );
