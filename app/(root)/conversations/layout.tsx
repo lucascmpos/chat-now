@@ -20,7 +20,7 @@ const Layout = ({ children }: Props) => {
       <ItemList title="Conversas" action={<CreateGroupDialog />}>
         {conversations ? (
           conversations.length === 0 ? (
-            <p className="w-full h-full flex items-center justify-center">
+            <p className="w-full h-full flex text-center items-center justify-center">
               Adicione um amigo para começar a conversar!
             </p>
           ) : (
