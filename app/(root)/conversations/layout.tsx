@@ -13,6 +13,8 @@ type Props = React.PropsWithChildren<{}>;
 
 const Layout = ({ children }: Props) => {
   const conversations = useQuery(api.conversations.get);
+  let firstGroupRendered = false;
+
   return (
     <>
       <ItemList title="Conversations" action={<CreateGroupDialog />}>
@@ -22,30 +24,51 @@ const Layout = ({ children }: Props) => {
               No conversations. Add a friend to start a conversation!
             </p>
           ) : (
-            conversations.map((conversations) => {
-              return conversations.conversation.isGroup ? (
-                <div className="flex flex-col items-start w-full">
-                  <h1 className="text-2xl font-semibold tracking-tight">
-                    Groups
-                  </h1>
-                  <GroupConversationItem
-                    key={conversations.conversation._id}
-                    id={conversations.conversation._id}
-                    name={conversations.conversation.name || ""}
-                    lastMessageContent={conversations.lastMessage?.content}
-                    lastMessageSender={conversations.lastMessage?.sender}
+            conversations.map((conversation) => {
+              if (conversation.conversation.isGroup) {
+                if (!firstGroupRendered) {
+                  firstGroupRendered = true;
+                  return (
+                    <React.Fragment key={conversation.conversation._id}>
+                      <div className="flex flex-col items-start w-full">
+                        <h1 className="text-2xl font-semibold tracking-tight">
+                          Groups
+                        </h1>
+                      </div>
+                      <GroupConversationItem
+                        id={conversation.conversation._id}
+                        name={conversation.conversation.name || ""}
+                        lastMessageContent={conversation.lastMessage?.content}
+                        lastMessageSender={conversation.lastMessage?.sender}
+                        unseenCount={conversation.unseenCount}
+                      />
+                    </React.Fragment>
+                  );
+                } else {
+                  return (
+                    <GroupConversationItem
+                      key={conversation.conversation._id}
+                      id={conversation.conversation._id}
+                      name={conversation.conversation.name || ""}
+                      lastMessageContent={conversation.lastMessage?.content}
+                      lastMessageSender={conversation.lastMessage?.sender}
+                      unseenCount={conversation.unseenCount}
+                    />
+                  );
+                }
+              } else {
+                return (
+                  <DmConversationItem
+                    key={conversation.conversation._id}
+                    id={conversation.conversation._id}
+                    username={conversation.otherMember?.username || ""}
+                    imageUrl={conversation.otherMember?.imageUrl || ""}
+                    lastMessageContent={conversation.lastMessage?.content}
+                    lastMessageSender={conversation.lastMessage?.sender}
+                    unseenCount={conversation.unseenCount}
                   />
-                </div>
-              ) : (
-                <DmConversationItem
-                  key={conversations.conversation._id}
-                  id={conversations.conversation._id}
-                  username={conversations.otherMember?.username || ""}
-                  imageUrl={conversations.otherMember?.imageUrl || ""}
-                  lastMessageContent={conversations.lastMessage?.content}
-                  lastMessageSender={conversations.lastMessage?.sender}
-                />
-              );
+                );
+              }
             })
           )
         ) : (
