@@ -6,7 +6,7 @@
 
 # Link to the app
 
-[Dev Food](https:/chatsnow.vercel.app)
+[Chat Now](https://chatsnow.vercel.app)
 
 # 🔍 Summary
 
