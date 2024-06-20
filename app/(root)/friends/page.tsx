@@ -14,7 +14,7 @@ const FriendsPage = (props: Props) => {
   const requests = useQuery(api.requests.get);
   return (
     <>
-      <ItemList title="Amigos" action={<AddFriendDialog />}>
+      <ItemList title="Convites" action={<AddFriendDialog />}>
         {requests ? (
           requests.length === 0 ? (
             <p className="w-full h-full flex items-center justify-center">

@@ -46,7 +46,7 @@ import { z } from "zod";
 type Props = {};
 
 const CreateGroupFormSchema = z.object({
-  name: z.string().min(1, { message: "É preciso um nome" }),
+  name: z.string().min(1, { message: "O grupo precisa de um nome" }),
   members: z
     .string()
     .array()
@@ -125,9 +125,12 @@ const CreateGroupDialog = (props: Props) => {
               render={({ field }) => {
                 return (
                   <FormItem>
-                    <FormLabel>Nome do grupo</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Nome do grupo aqui..." />
+                      <Input
+                        className="mt-4"
+                        {...field}
+                        placeholder="Digite o nome do grupo..."
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

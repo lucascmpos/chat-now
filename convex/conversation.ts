@@ -1,12 +1,45 @@
 import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { getUserByClerkId } from "./_utils";
+import { Id } from "./_generated/dataModel";
+
+type MemberDetails = {
+  _id: Id<"users">;
+  username: string;
+};
+
+type BaseConversationDetails = {
+  name: string;
+  isGroup: boolean;
+};
+
+type NonGroupConversationDetails = BaseConversationDetails & {
+  otherMember: {
+    lastSeenMessageId: Id<"messages"> | undefined;
+    _id?: Id<"users"> | undefined;
+    username?: string | undefined;
+    imageUrl?: string | undefined;
+    clerkId?: string | undefined;
+    email?: string | undefined;
+  } | null;
+  isGroup: false;
+};
+
+type GroupConversationDetails = BaseConversationDetails & {
+  members: MemberDetails[];
+  otherMember: null;
+  isGroup: true;
+};
+
+type ConversationDetails =
+  | NonGroupConversationDetails
+  | GroupConversationDetails;
 
 export const get = query({
   args: {
     id: v.id("conversations"),
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx, args): Promise<ConversationDetails> => {
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
@@ -52,13 +85,13 @@ export const get = query({
       const otherMemberDetails = await ctx.db.get(otherMembership.memberId);
 
       return {
-        ...conversation,
+        name: conversation.name,
         otherMember: {
           ...otherMemberDetails,
           lastSeenMessageId: otherMembership.lastSeenMessage,
         },
-        otherMembers: null,
-      };
+        isGroup: false,
+      } as NonGroupConversationDetails;
     } else {
       const otherMembers = await Promise.all(
         allConversationMemberships
@@ -75,7 +108,12 @@ export const get = query({
             };
           })
       );
-      return { ...conversation, otherMembers, otherMember: null };
+      return {
+        name: conversation.name,
+        members: otherMembers,
+        otherMember: null,
+        isGroup: true,
+      } as GroupConversationDetails;
     }
   },
 });

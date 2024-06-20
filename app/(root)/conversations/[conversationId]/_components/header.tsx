@@ -8,13 +8,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { CircleArrowLeft, Minus, Settings, Trash } from "lucide-react";
+import { CircleArrowLeft, Settings } from "lucide-react";
 import Link from "next/link";
 import React, { ReactElement } from "react";
 
 type Props = {
   imageUrl?: string;
+  email: string;
   name: string;
+  members: string[];
   options?: {
     label: string;
     icon: ReactElement;
@@ -23,10 +25,10 @@ type Props = {
   }[];
 };
 
-const Header = ({ imageUrl, name, options }: Props) => {
+const Header = ({ imageUrl, email, name, members, options }: Props) => {
   return (
     <Card className="w-full flex rounded-lg items-center p-2 justify-between">
-      <div className="flex items-center gap-2">
+      <div className="flex w-full items-center gap-2">
         <Link href="/conversations" className="block lg:hidden">
           <CircleArrowLeft />
         </Link>
@@ -34,7 +36,13 @@ const Header = ({ imageUrl, name, options }: Props) => {
           <AvatarImage src={imageUrl} />
           <AvatarFallback>{name.substring(0, 1)}</AvatarFallback>
         </Avatar>
-        <h2 className="font-semibold">{name}</h2>
+        <div className="flex flex-col w-full  justify-start">
+          <h2 className="font-semibold">{name}</h2>
+          <p className="font-semibold text-xs text-muted-foreground">{email}</p>
+          <p className="font-semibold text-xs text-muted-foreground">
+            {members.length > 0 ? `Você, ${members.join(", ")}` : ""}
+          </p>
+        </div>
       </div>
       <div className="flex gap-2">
         {options ? (

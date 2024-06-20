@@ -1,6 +1,6 @@
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
-import { MessageSquare, Users } from "lucide-react";
+import { Mails, MessageSquare, Users } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
 
@@ -27,9 +27,9 @@ export const useNavigation = () => {
         count: unseenMessagesCount,
       },
       {
-        name: "Amigos",
+        name: "Convites",
         href: "/friends",
-        icon: <Users />,
+        icon: <Mails />,
         active: pathname.startsWith("/friends"),
         count: requestsCount,
       },

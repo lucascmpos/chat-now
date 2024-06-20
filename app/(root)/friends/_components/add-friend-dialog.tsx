@@ -78,12 +78,12 @@ const AddFriendDialog = () => {
             </DialogTrigger>
           </Button>
         </TooltipTrigger>
-        <TooltipContent>Adicionar novo amigo</TooltipContent>
+        <TooltipContent>Enviar convite de amizade</TooltipContent>
       </Tooltip>
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Adicionar novo amigo</DialogTitle>
+          <DialogTitle>Enviar convite</DialogTitle>
           <DialogDescription>
             Envie um pedido para se conectar com seus amigos!
           </DialogDescription>
@@ -98,9 +98,11 @@ const AddFriendDialog = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Email..." {...field} />
+                    <Input
+                      placeholder="Digite o email de quem você quer se conectar..."
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

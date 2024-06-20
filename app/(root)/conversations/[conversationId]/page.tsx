@@ -55,10 +55,18 @@ const ConversationPage = ({ params: { conversationId } }: Props) => {
         imageUrl={
           conversation.isGroup ? undefined : conversation.otherMember?.imageUrl
         }
+        email={
+          conversation.isGroup ? "" : conversation.otherMember?.email || ""
+        }
         name={
-          (conversation.isGroup
+          conversation.isGroup
             ? conversation.name
-            : conversation.otherMember?.username) || ""
+            : conversation.otherMember?.username || ""
+        }
+        members={
+          conversation.isGroup
+            ? conversation.members.map((member) => member.username)
+            : []
         }
         options={
           conversation.isGroup
@@ -89,9 +97,7 @@ const ConversationPage = ({ params: { conversationId } }: Props) => {
       <Body
         members={
           conversation.isGroup
-            ? conversation.otherMembers
-              ? conversation.otherMembers
-              : []
+            ? []
             : conversation.otherMember
               ? [conversation.otherMember]
               : []
