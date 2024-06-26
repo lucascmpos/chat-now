@@ -22,7 +22,7 @@ Project of a chat application where you can send friend requests, create groups,
 ## 💻 Functionalities
 
 - Responsiveness (Mobile First)
-- Login with Google / LinkedIn / GitHub
+- Login with Google
 - Light and dark theme
 
 ---
